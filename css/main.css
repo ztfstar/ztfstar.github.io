@@ -22,6 +22,9 @@ section,
 summary {
   display: block;
 }
+main {
+  background-color: #fbfbfb;
+}
 audio,
 canvas,
 progress,
@@ -277,7 +280,7 @@ p {
   margin: 0 0 20px 0;
 }
 a {
-  color: #555;
+  color: #fff;
   text-decoration: none;
   outline: none;
   border-bottom: 1px solid #999;
@@ -1112,7 +1115,7 @@ pre .javascript .function {
   position: relative;
   display: inline-block;
   padding: 0 40px;
-  color: #222;
+  color: #fff;
   background: #222;
   border-bottom: none;
 }
@@ -1201,7 +1204,7 @@ pre .javascript .function {
 }
 .menu .menu-item a {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   line-height: inherit;
   border-bottom: 1px solid transparent;
   transition-property: border-color;
@@ -1265,6 +1268,14 @@ pre .javascript .function {
 }
 .use-motion .collection-title {
   opacity: 0;
+}
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover {
+  color: #0477ab;
+  text-decoration: underline;
 }
 .posts-expand {
   padding-top: 40px;
@@ -1822,7 +1833,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #961d24;
+  background: #2dff36;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2607,7 +2618,7 @@ hr {
   margin-top: 80px;
 }
 .header {
-  background: #f5f5f5;
+  background: #8a2be2;
 }
 .header-inner {
   padding: 25px 0 20px;
@@ -2650,7 +2661,7 @@ hr {
   display: none;
 }
 .site-meta .site-title {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: bolder;
 }
 @media (max-width: 767px) {
@@ -2896,7 +2907,7 @@ hr {
 }
 .footer-inner {
   margin: 0 auto;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .footer-inner {
