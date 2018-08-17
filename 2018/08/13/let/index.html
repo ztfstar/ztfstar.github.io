@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="es6," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="有var,为什么还要let和const?回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：1234for(var i=0;i&amp;lt;5;i++)&amp;#123;  console.log(i)//1，2，3，4，5&amp;#125;console.log(i)//5 上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻">
+<meta name="keywords" content="es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记-let const">
+<meta property="og:url" content="http://yoursite.com/2018/08/13/let/index.html">
+<meta property="og:site_name" content="ztfmlt">
+<meta property="og:description" content="有var,为什么还要let和const?回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：1234for(var i=0;i&amp;lt;5;i++)&amp;#123;  console.log(i)//1，2，3，4，5&amp;#125;console.log(i)//5 上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-16T08:02:20.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6学习笔记-let const">
+<meta name="twitter:description" content="有var,为什么还要let和const?回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：1234for(var i=0;i&amp;lt;5;i++)&amp;#123;  console.log(i)//1，2，3，4，5&amp;#125;console.log(i)//5 上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/13/let/"/>
+
+
+
+
+
+  <title>es6学习笔记-let const | ztfmlt</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        
+        <span class="site-title">ztfmlt</span>
+        
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/let/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ztf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ztfmlt">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">es6学习笔记-let const</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T14:12:11+08:00">
+                2018-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="有var-为什么还要let和const"><a href="#有var-为什么还要let和const" class="headerlink" title="有var,为什么还要let和const?"></a>有var,为什么还要let和const?</h2><p>回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">  console.log(i)//1，2，3，4，5</span><br><span class="line">&#125;</span><br><span class="line">console.log(i)//5</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻存在window属性中，造成内存的浪费。<br><br>再来看第二个🌰：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var foo = 1;</span><br><span class="line">function bar() &#123;</span><br><span class="line">	if (!foo) &#123;</span><br><span class="line">		var foo = 10;</span><br><span class="line">	&#125;</span><br><span class="line">	alert(foo);//10</span><br><span class="line">&#125;</span><br><span class="line">bar();</span><br></pre></td></tr></table></figure></p>
+<p>这是因为var关键字声明的变量会存在变量提升，上面的代码的运行过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo = 1;</span><br><span class="line">function bar() &#123;</span><br><span class="line">	var foo;//foo==undefined</span><br><span class="line">	if (!foo) &#123;//!undefined==true</span><br><span class="line">		var foo = 10;</span><br><span class="line">	&#125;</span><br><span class="line">	alert(foo);</span><br><span class="line">&#125;</span><br><span class="line">bar();</span><br></pre></td></tr></table></figure></p>
+<p>再来第三个🌰：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a=1;</span><br><span class="line">var a=2;</span><br><span class="line">console.log(a)//a=2</span><br></pre></td></tr></table></figure></p>
+<p>啧啧啧……喜新厌旧的var。<br></p>
+<h2 id="let是更完美的var"><a href="#let是更完美的var" class="headerlink" title="let是更完美的var"></a>let是更完美的var</h2><p>var的缺陷是js这种语言设计之初留下的坑，Brendan Eich决定修复这个问题，于是便有了let关键字。<br>下面我们全面认识一下let：<br></p>
+<h3 id="基本语法及块级作用域"><a href="#基本语法及块级作用域" class="headerlink" title="基本语法及块级作用域"></a>基本语法及块级作用域</h3><p>let的声明变量的方式和var相同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  let a=1;</span><br><span class="line">  var b=1;</span><br><span class="line">&#125;</span><br><span class="line">a // ReferenceError: a is not defined.</span><br><span class="line">b // 1</span><br></pre></td></tr></table></figure></p>
+<p>从这个例子也可以看到let是存在块级作用域的,总提<strong>块级作用域，那块级作用域到底有什么用处呢？</strong>其实除了上面提到的var的缺陷的第一个例子，要是有块级作用域存在的话，就不会出现变量泄漏在全局的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0;i&lt;5;i++)&#123;</span><br><span class="line">  console.log(i)//1，2，3，4，5</span><br><span class="line">&#125;</span><br><span class="line">console.log(i)//ReferenceError: i is not defined</span><br></pre></td></tr></table></figure></p>
+<p>上面提到的var缺陷的第二个例子正是需要块级作用域的另一种情况，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var foo = 1;</span><br><span class="line">function bar() &#123;</span><br><span class="line">	if (!foo) &#123;</span><br><span class="line">		let foo = 10;</span><br><span class="line">	&#125;</span><br><span class="line">	alert(foo);//1</span><br><span class="line">&#125;</span><br><span class="line">bar();</span><br></pre></td></tr></table></figure></p>
+<h3 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h3><p>我们文章最初的第一个、第二个例子已经用let关键字代替var重新实验了一遍得出let是存在块级作用域的结论。那么第三个例子如果同样用let代替var呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a=1;</span><br><span class="line">let a=2;</span><br><span class="line">console.log(a)//SyntaxError: Identifier &apos;a&apos; has already been declared</span><br></pre></td></tr></table></figure></p>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p>暂时性死区简单的说就是变量未声明之前是不可用的。简单的一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  t=1;</span><br><span class="line">  let t;</span><br><span class="line">&#125;//ReferenceError: t is not defined</span><br></pre></td></tr></table></figure></p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>const和let关键字用法和功能与let基本一致，唯一的不同是const声明的变量只可以在声明时赋值，不可随意修改，否则会导致错误。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const c=1;</span><br><span class="line">c=2;//Uncaught TypeError: Assignment to constant variable.</span><br><span class="line"></span><br><span class="line">let d=1;</span><br><span class="line">d=2;//2</span><br></pre></td></tr></table></figure></p>
+<p>ES5 只有两种声明变量的方法：var命令和function命令。ES6 除了添加let和const命令，另外两种声明变量的方法：import命令和class命令。所以，ES6 一共有 6 种声明变量的方法。后面有时间再总结学习一下。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/es6/" rel="tag"># es6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/15/解构赋值/" rel="prev" title="es6学习笔记-解构赋值">
+                es6学习笔记-解构赋值 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ztf</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有var-为什么还要let和const"><span class="nav-number">1.</span> <span class="nav-text">有var,为什么还要let和const?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let是更完美的var"><span class="nav-number">2.</span> <span class="nav-text">let是更完美的var</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法及块级作用域"><span class="nav-number">2.1.</span> <span class="nav-text">基本语法及块级作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不允许重复声明"><span class="nav-number">2.2.</span> <span class="nav-text">不允许重复声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂时性死区"><span class="nav-number">2.3.</span> <span class="nav-text">暂时性死区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">2.4.</span> <span class="nav-text">const</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ztf</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+  </div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
