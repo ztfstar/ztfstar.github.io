@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="ztfmlt">
 <meta property="og:description" content="前几天听项目组的同学调试bug,还像是对象的拷贝问题导致的，所以想整理一下，避免后面再踩坑。 js中数据的存储先总结一下js中数据的类型和数据的存储方式； 数据类型基本类型：undefined、null、boolean、number、string、Symbol引用类型：Object 数据存储方式js中数据有两种存储方式：栈存储和堆存储。其中基本数据类型主要放在栈中，引用类型主要放在堆中。栈内">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T08:49:50.775Z">
+<meta property="og:updated_time" content="2018-08-22T07:16:57.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js对象深拷贝&#x2F;浅拷贝">
 <meta name="twitter:description" content="前几天听项目组的同学调试bug,还像是对象的拷贝问题导致的，所以想整理一下，避免后面再踩坑。 js中数据的存储先总结一下js中数据的类型和数据的存储方式； 数据类型基本类型：undefined、null、boolean、number、string、Symbol引用类型：Object 数据存储方式js中数据有两种存储方式：栈存储和堆存储。其中基本数据类型主要放在栈中，引用类型主要放在堆中。栈内">
@@ -198,26 +198,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
@@ -234,6 +214,26 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -346,10 +346,10 @@
 <h3 id="利用递归实现深拷贝-多层对象-："><a href="#利用递归实现深拷贝-多层对象-：" class="headerlink" title="利用递归实现深拷贝(多层对象)："></a>利用递归实现深拷贝(多层对象)：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">var obj1=&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    arr:[1,2]</span><br><span class="line">&#125;</span><br><span class="line">function copy(obj)&#123;</span><br><span class="line">    var o=&#123;&#125;</span><br><span class="line">    for (var prop in obj)&#123;</span><br><span class="line">        if(obj.hasOwnProperty)&#123;</span><br><span class="line">            if(typeof(obj[prop])===&apos;object&apos;)&#123;</span><br><span class="line">                o[prop]=obj[prop].constructor===Array?[]:&#123;&#125;;</span><br><span class="line">                o[prop]=copy(obj[prop])</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                o[prop]=obj[prop]</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj2=copy(obj1);</span><br><span class="line"></span><br><span class="line">obj2.id=2;</span><br><span class="line">obj2.arr[0]=0</span><br><span class="line"></span><br><span class="line">obj1.id//1</span><br><span class="line">obj2.id//2</span><br><span class="line"></span><br><span class="line">obj1.arr//[1,2]</span><br><span class="line">obj2.arr//[0,2]</span><br></pre></td></tr></table></figure>
 <h3 id="JSON-parse-JSON-stringify-XXXX-实现对象的深拷贝-多层对象"><a href="#JSON-parse-JSON-stringify-XXXX-实现对象的深拷贝-多层对象" class="headerlink" title="JSON.parse(JSON.stringify(XXXX))实现对象的深拷贝(多层对象)"></a>JSON.parse(JSON.stringify(XXXX))实现对象的深拷贝(多层对象)</h3><p>JSON对象parse方法可以将JSON字符串反序列化成JS对象，stringify方法可以将JS对象序列化成JSON字符串，借助这两个方法，也可以实现对象的深拷贝。<br>参考<a href="https://github.com/wengjq/Blog/issues/3" target="_blank" rel="noopener">javaScript中浅拷贝和深拷贝的实现</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var obj1=&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    arr:[1,2]</span><br><span class="line">&#125;</span><br><span class="line">function copy(obj)&#123;</span><br><span class="line">    var o=&#123;&#125;</span><br><span class="line">    o=JSON.parse(JSON.stringify(obj))</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2=copy(obj1);</span><br><span class="line">obj2.id=2;</span><br><span class="line">obj2.arr[0]=0</span><br><span class="line"></span><br><span class="line">obj1.id//1</span><br><span class="line">obj2.id//2</span><br><span class="line"></span><br><span class="line">obj1.arr//[1,2]</span><br><span class="line">obj2.arr//[0,2]</span><br></pre></td></tr></table></figure></p>
 <h3 id="es6扩展运算符-…-实现对象的深拷贝-一层对象"><a href="#es6扩展运算符-…-实现对象的深拷贝-一层对象" class="headerlink" title="es6扩展运算符(…)实现对象的深拷贝(一层对象)"></a>es6扩展运算符(…)实现对象的深拷贝(一层对象)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj1=&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    name:&apos;zhang&apos;</span><br><span class="line">&#125;</span><br><span class="line">obj2=&#123;...obj1&#125;;</span><br><span class="line">obj2.id=2;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj1.id//1</span><br><span class="line">obj2.id//2</span><br></pre></td></tr></table></figure>
-<p>###ES6的Object.assign(一层对象)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var obj1=&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    arr:[1,2]</span><br><span class="line">&#125;</span><br><span class="line">function copy(obj)&#123;</span><br><span class="line">    var o=&#123;&#125;</span><br><span class="line">    o=Object.assign(&#123;&#125;,obj);</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2=copy(obj1);</span><br><span class="line">obj2.id=2;</span><br><span class="line">obj2.arr[0]=0</span><br><span class="line"></span><br><span class="line">obj1.id//1</span><br><span class="line">obj2.id//2</span><br><span class="line"></span><br><span class="line">obj1.arr//[0,2]</span><br><span class="line">obj2.arr//[0,2]</span><br></pre></td></tr></table></figure></p>
+<h3 id="ES6的Object-assign-一层对象"><a href="#ES6的Object-assign-一层对象" class="headerlink" title="ES6的Object.assign(一层对象)"></a>ES6的Object.assign(一层对象)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var obj1=&#123;</span><br><span class="line">    id:1,</span><br><span class="line">    arr:[1,2]</span><br><span class="line">&#125;</span><br><span class="line">function copy(obj)&#123;</span><br><span class="line">    var o=&#123;&#125;</span><br><span class="line">    o=Object.assign(&#123;&#125;,obj);</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2=copy(obj1);</span><br><span class="line">obj2.id=2;</span><br><span class="line">obj2.arr[0]=0</span><br><span class="line"></span><br><span class="line">obj1.id//1</span><br><span class="line">obj2.id//2</span><br><span class="line"></span><br><span class="line">obj1.arr//[0,2]</span><br><span class="line">obj2.arr//[0,2]</span><br></pre></td></tr></table></figure>
 <h3 id="slice方法深拷贝数组"><a href="#slice方法深拷贝数组" class="headerlink" title="slice方法深拷贝数组"></a>slice方法深拷贝数组</h3><p>因为slice不是在原数组上修改，而是会返回新的数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1=[1,2,3,4,5];</span><br><span class="line">var arr2=arr1.slice(0);</span><br><span class="line">arr2.push(6);</span><br><span class="line">console.log(arr1);//[1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2);//[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure></p>
-<p>###concat方法，因为concat不是在原数组上修改，而是会返回新的数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1=[1,2,3,4,5];</span><br><span class="line">var arr2=arr1.concat();</span><br><span class="line">arr2.push(6);</span><br><span class="line">console.log(arr1);//[1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2);//[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure></p>
-<p>###es6提供的方法 Array.from()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1=[1,2,3,4,5];</span><br><span class="line">var arr2=Array.from(arr1);</span><br><span class="line">arr2.push(6);</span><br><span class="line">console.log(arr1);//[1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2);//[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure></p>
+<h3 id="concat方法，因为concat不是在原数组上修改，而是会返回新的数组"><a href="#concat方法，因为concat不是在原数组上修改，而是会返回新的数组" class="headerlink" title="concat方法，因为concat不是在原数组上修改，而是会返回新的数组"></a>concat方法，因为concat不是在原数组上修改，而是会返回新的数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1=[1,2,3,4,5];</span><br><span class="line">var arr2=arr1.concat();</span><br><span class="line">arr2.push(6);</span><br><span class="line">console.log(arr1);//[1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2);//[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure>
+<h3 id="es6提供的方法-Array-from"><a href="#es6提供的方法-Array-from" class="headerlink" title="es6提供的方法 Array.from()"></a>es6提供的方法 Array.from()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1=[1,2,3,4,5];</span><br><span class="line">var arr2=Array.from(arr1);</span><br><span class="line">arr2.push(6);</span><br><span class="line">console.log(arr1);//[1, 2, 3, 4, 5]</span><br><span class="line">console.log(arr2);//[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure>
 <p>参考：<a href="https://www.zhihu.com/question/23031215" target="_blank" rel="noopener">javascript中的深拷贝和浅拷贝？</a><br><a href="https://juejin.im/post/59ac1c4ef265da248e75892b#heading-12" target="_blank" rel="noopener">js 深拷贝 vs 浅拷贝</a><br><a href="http://www.cnblogs.com/penghuwan/p/7359026.html" target="_blank" rel="noopener">javascript-详解javaScript的深拷贝</a><br><a href="https://github.com/wengjq/Blog/issues/3" target="_blank" rel="noopener">javaScript中浅拷贝和深拷贝的实现</a></p>
 
       
@@ -381,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/15/react native学习一/" rel="next" title="react native学习一">
-                <i class="fa fa-chevron-left"></i> react native学习一
+              <a href="/2018/08/15/react native学习一/" rel="next" title="react native原理学习一">
+                <i class="fa fa-chevron-left"></i> react native原理学习一
               </a>
             
           </div>
@@ -390,6 +390,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/15/解构赋值/" rel="prev" title="es6学习笔记-解构赋值">
+                es6学习笔记-解构赋值 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -512,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js中数据的存储"><span class="nav-number">1.</span> <span class="nav-text">js中数据的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储方式"><span class="nav-number">1.2.</span> <span class="nav-text">数据存储方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">2.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">3.</span> <span class="nav-text">深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用递归实现深拷贝-多层对象-："><span class="nav-number">3.1.</span> <span class="nav-text">利用递归实现深拷贝(多层对象)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-parse-JSON-stringify-XXXX-实现对象的深拷贝-多层对象"><span class="nav-number">3.2.</span> <span class="nav-text">JSON.parse(JSON.stringify(XXXX))实现对象的深拷贝(多层对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6扩展运算符-…-实现对象的深拷贝-一层对象"><span class="nav-number">3.3.</span> <span class="nav-text">es6扩展运算符(…)实现对象的深拷贝(一层对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice方法深拷贝数组"><span class="nav-number">3.4.</span> <span class="nav-text">slice方法深拷贝数组</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js中数据的存储"><span class="nav-number">1.</span> <span class="nav-text">js中数据的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储方式"><span class="nav-number">1.2.</span> <span class="nav-text">数据存储方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">2.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">3.</span> <span class="nav-text">深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用递归实现深拷贝-多层对象-："><span class="nav-number">3.1.</span> <span class="nav-text">利用递归实现深拷贝(多层对象)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-parse-JSON-stringify-XXXX-实现对象的深拷贝-多层对象"><span class="nav-number">3.2.</span> <span class="nav-text">JSON.parse(JSON.stringify(XXXX))实现对象的深拷贝(多层对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6扩展运算符-…-实现对象的深拷贝-一层对象"><span class="nav-number">3.3.</span> <span class="nav-text">es6扩展运算符(…)实现对象的深拷贝(一层对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6的Object-assign-一层对象"><span class="nav-number">3.4.</span> <span class="nav-text">ES6的Object.assign(一层对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice方法深拷贝数组"><span class="nav-number">3.5.</span> <span class="nav-text">slice方法深拷贝数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat方法，因为concat不是在原数组上修改，而是会返回新的数组"><span class="nav-number">3.6.</span> <span class="nav-text">concat方法，因为concat不是在原数组上修改，而是会返回新的数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6提供的方法-Array-from"><span class="nav-number">3.7.</span> <span class="nav-text">es6提供的方法 Array.from()</span></a></li></ol></li></ol></div>
             
 
           </div>
