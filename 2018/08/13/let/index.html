@@ -52,6 +52,32 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -91,10 +117,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="es6学习笔记-let const">
 <meta property="og:url" content="http://yoursite.com/2018/08/13/let/index.html">
-<meta property="og:site_name" content="ztfmlt">
+<meta property="og:site_name" content="itransformer">
 <meta property="og:description" content="有var,为什么还要let和const?回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：1234for(var i=0;i&amp;lt;5;i++)&amp;#123;  console.log(i)//1，2，3，4，5&amp;#125;console.log(i)//5 上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T09:50:02.199Z">
+<meta property="og:updated_time" content="2018-11-14T03:14:58.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6学习笔记-let const">
 <meta name="twitter:description" content="有var,为什么还要let和const?回答这个问题之前，我们先来回顾一下目前var关键字的缺陷，第一个🌰：1234for(var i=0;i&amp;lt;5;i++)&amp;#123;  console.log(i)//1，2，3，4，5&amp;#125;console.log(i)//5 上面的例子，最外层输出i的值5，因此我们可以推出var命令是没有块级作用域的，并且var声明的变量会以全局变量的形式驻">
@@ -133,7 +159,7 @@
 
 
 
-  <title>es6学习笔记-let const | ztfmlt</title>
+  <title>es6学习笔记-let const | itransformer</title>
   
 
 
@@ -163,7 +189,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         
-        <span class="site-title">ztfmlt</span>
+        <span class="site-title">itransformer</span>
         
       </a>
     </div>
@@ -279,7 +305,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ztfmlt">
+      <meta itemprop="name" content="itransformer">
     </span>
 
     
@@ -309,6 +335,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -465,22 +513,31 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 

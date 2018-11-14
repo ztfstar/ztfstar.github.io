@@ -1277,6 +1277,10 @@ pre .javascript .function {
   color: #0477ab;
   text-decoration: underline;
 }
+.post-body a {
+  color: #000;
+  font-weight: bold;
+}
 .posts-expand {
   padding-top: 40px;
 }
@@ -1833,7 +1837,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1d3eff;
+  background: #50d1ff;
 }
 .links-of-blogroll {
   font-size: 13px;
