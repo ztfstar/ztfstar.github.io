@@ -1135,6 +1135,10 @@ pre .javascript .function {
   font-size: 20px;
   font-weight: normal;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #cfd7ff;
+  border: 1px solid #4e57ef;
+  box-shadow: 3px 4px 0px #4e57ef;
+  color: #000;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1837,7 +1841,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a45291;
+  background: #e74e9a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2610,9 +2614,11 @@ h6 {
 }
 p {
   margin: 0 0 25px 0;
+  color: #000;
 }
 a {
   border-bottom-color: #ccc;
+  color: #000;
 }
 hr {
   margin: 20px 0;
@@ -2622,7 +2628,7 @@ hr {
   margin-top: 80px;
 }
 .header {
-  background: #8a2be2;
+  background: #fdf9f3;
 }
 .header-inner {
   padding: 25px 0 20px;
@@ -2644,7 +2650,6 @@ hr {
 }
 .site-meta {
   float: left;
-  margin-left: -20px;
   line-height: normal;
 }
 @media (max-width: 767px) {
@@ -2714,7 +2719,7 @@ hr {
 }
 .menu {
   float: right;
-  margin: 8px 0 0 0;
+  margin: 8px -80px 0 0;
 }
 @media (max-width: 767px) {
   .menu {
@@ -2735,10 +2740,11 @@ hr {
 }
 .menu .menu-item a {
   padding: 0 10px;
-  background: none;
+  background: #66e2d5;
   border: none;
   border-radius: 2px;
   transition-property: background;
+  color: #000;
 }
 @media (max-width: 767px) {
   .menu .menu-item a {
