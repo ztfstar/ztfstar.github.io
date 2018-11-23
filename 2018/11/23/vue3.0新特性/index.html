@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="vue," />
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="1、更快 Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。2、更小 Tr">
+<meta name="description" content="1、更快Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。 2、更小Tre">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3.0新特性">
 <meta property="og:url" content="http://yoursite.com/2018/11/23/vue3.0新特性/index.html">
 <meta property="og:site_name" content="itransformer">
-<meta property="og:description" content="1、更快 Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。2、更小 Tr">
+<meta property="og:description" content="1、更快Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。 2、更小Tre">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-23T07:37:15.272Z">
+<meta property="og:updated_time" content="2018-11-23T07:42:26.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue3.0新特性">
-<meta name="twitter:description" content="1、更快 Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。2、更小 Tr">
+<meta name="twitter:description" content="1、更快Virtual DOM 完全重写，mounting &amp;amp; patching 提速 100% ；更多编译时（compile-time）提醒以减少 runtime 开销；基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；放弃 Object.defineProperty ，使用更快的原生 Proxy ；组件实例初始化速度提高 100％ ；提速一倍/内存使用降低一半。 2、更小Tre">
 
 
 
@@ -309,6 +310,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -336,15 +359,11 @@
       
 
       
-        <p>1、更快</p>
-<p>Virtual DOM 完全重写，mounting &amp; patching 提速 100% ；<br>更多编译时（compile-time）提醒以减少 runtime 开销；<br>基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；<br>放弃 Object.defineProperty ，使用更快的原生 Proxy ；<br>组件实例初始化速度提高 100％ ；<br>提速一倍/内存使用降低一半。<br>2、更小</p>
-<p>Tree-shaking 更友好；<br>新的 core runtime: ~10kb gzipped</p>
-<p>3、更易维护</p>
-<p>Flow -&gt; TypeScript<br>Decoupled Packages（解耦包）<br>编译器重写</p>
-<p>3、更易维护</p>
-<p>Flow -&gt; TypeScript<br>Decoupled Packages（解耦包）<br>编译器重写</p>
-<p>5、让开发者更轻松</p>
-<p>Exposed reactivity API<br>轻松识别组件重新渲染的原因<br>改进 TypeScript 以支持 w/TSX<br>改进警告追踪<br>Experimental Hooks API<br>Experimental Time Slicing Support<br>支持 IE11</p>
+        <h4 id="1、更快"><a href="#1、更快" class="headerlink" title="1、更快"></a>1、更快</h4><p>Virtual DOM 完全重写，mounting &amp; patching 提速 100% ；<br>更多编译时（compile-time）提醒以减少 runtime 开销；<br>基于 Proxy 观察者机制以满足全语言覆盖及更好的性能；<br>放弃 Object.defineProperty ，使用更快的原生 Proxy ；<br>组件实例初始化速度提高 100％ ；<br>提速一倍/内存使用降低一半。</p>
+<h4 id="2、更小"><a href="#2、更小" class="headerlink" title="2、更小"></a>2、更小</h4><p>Tree-shaking 更友好；<br>新的 core runtime: ~10kb gzipped</p>
+<h4 id="3、更易维护"><a href="#3、更易维护" class="headerlink" title="3、更易维护"></a>3、更易维护</h4><p>Flow -&gt; TypeScript<br>Decoupled Packages（解耦包）<br>编译器重写</p>
+<h4 id="4、更易维护"><a href="#4、更易维护" class="headerlink" title="4、更易维护"></a>4、更易维护</h4><p>Flow -&gt; TypeScript<br>Decoupled Packages（解耦包）<br>编译器重写</p>
+<h4 id="5、让开发者更轻松"><a href="#5、让开发者更轻松" class="headerlink" title="5、让开发者更轻松"></a>5、让开发者更轻松</h4><p>Exposed reactivity API<br>轻松识别组件重新渲染的原因<br>改进 TypeScript 以支持 w/TSX<br>改进警告追踪<br>Experimental Hooks API<br>Experimental Time Slicing Support<br>支持 IE11</p>
 
       
     </div>
@@ -359,6 +378,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
       
 
       
@@ -429,8 +454,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -467,7 +501,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -490,6 +524,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、更快"><span class="nav-number">1.</span> <span class="nav-text">1、更快</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、更小"><span class="nav-number">2.</span> <span class="nav-text">2、更小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、更易维护"><span class="nav-number">3.</span> <span class="nav-text">3、更易维护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、更易维护"><span class="nav-number">4.</span> <span class="nav-text">4、更易维护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、让开发者更轻松"><span class="nav-number">5.</span> <span class="nav-text">5、让开发者更轻松</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
