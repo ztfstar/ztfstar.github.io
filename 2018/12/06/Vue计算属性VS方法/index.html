@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/vue-computed1.png">
 <meta property="og:image" content="http://yoursite.com/img/vue-computed2.png">
-<meta property="og:updated_time" content="2018-12-06T12:19:51.242Z">
+<meta property="og:updated_time" content="2018-12-06T12:23:36.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue计算属性VS方法">
 <meta name="twitter:description" content="为什么要用计算属性计算属性的产生是很有必要的。虽然模版内的表达式可以非常便利的输出逻辑运算的值，但是它也带来了逻辑和模板视图混杂在一起的尴尬局面，且过于复杂的逻辑放在模板里也难以维护。 计算属性Demo12345678910111213141516171819202122232425262728293031323334353637&amp;lt;div id=&apos;App&apos;&amp;gt;     &amp;lt;butto">
@@ -374,7 +374,7 @@
 <li>对于方法来说，与computed不同的是，方法的每次调用都会重新计算，所以相较于计算属性来说，在性能消耗上，是会有相较高的性能消耗。</li>
 </ul>
 <h3 id="为什么需要缓存？"><a href="#为什么需要缓存？" class="headerlink" title="为什么需要缓存？"></a>为什么需要缓存？</h3><p><strong>假设我们有一个性能开销比较大的计算属性 A，它需要遍历一个巨大的数组并做大量的计算。然后我们可能有其他的计算属性依赖于 A 。如果没有缓存，我们将不可避免的多次执行 A 的 getter！如果你不希望有缓存，请用方法来替代。</strong></p>
-<h3 id="计算属性的原理"><a href="#计算属性的原理" class="headerlink" title="计算属性的原理"></a>计算属性的原理</h3><p>看搭配一个大牛说的话：<em>“如果你想成为一名架构师，不能只停留在框架的 API 使用层面。”</em><br><a href="https://segmentfault.com/a/1190000010408657" target="_blank" rel="noopener">参考</a></p>
+<h2 id="计算属性的原理"><a href="#计算属性的原理" class="headerlink" title="计算属性的原理"></a>计算属性的原理</h2><p>看搭配一个大牛说的话：<em>“如果你想成为一名架构师，不能只停留在框架的 API 使用层面。”</em><br><a href="https://segmentfault.com/a/1190000010408657" target="_blank" rel="noopener">参考</a></p>
 
       
     </div>
@@ -545,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用计算属性"><span class="nav-number">1.</span> <span class="nav-text">为什么要用计算属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算属性Demo"><span class="nav-number">1.1.</span> <span class="nav-text">计算属性Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要缓存？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算属性的原理"><span class="nav-number">1.3.</span> <span class="nav-text">计算属性的原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用计算属性"><span class="nav-number">1.</span> <span class="nav-text">为什么要用计算属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算属性Demo"><span class="nav-number">1.1.</span> <span class="nav-text">计算属性Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要缓存？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要缓存？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算属性的原理"><span class="nav-number">2.</span> <span class="nav-text">计算属性的原理</span></a></li></ol></div>
             
 
           </div>
