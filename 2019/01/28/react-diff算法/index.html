@@ -94,10 +94,17 @@
 <meta property="og:site_name" content="itransformer">
 <meta property="og:description" content="为什么要了解diff这块内容呢？什么是diff算法呢？diff算法其实是1986年Myers提出的，用来解决最长公共序列问题(longest common sequence problem，LCS问题)。Dreact核心的两个内容就是virtual dom和diff算法。React diff作为Virtual DOM的加速器，其算法的改进优化是React界面渲染的基础，以及性能提高的保障。虽然开发">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-28T03:49:31.943Z">
+<meta property="og:image" content="http://yoursite.com/img/tree_diff1.png">
+<meta property="og:image" content="http://yoursite.com/img/tree_diff2.png">
+<meta property="og:image" content="http://yoursite.com/img/component_diff.png">
+<meta property="og:image" content="http://yoursite.com/img/element_diff1.png">
+<meta property="og:image" content="http://yoursite.com/img/element_diff2.png">
+<meta property="og:image" content="http://yoursite.com/img/element_diff3.png">
+<meta property="og:updated_time" content="2019-03-04T11:42:16.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react diff算法">
 <meta name="twitter:description" content="为什么要了解diff这块内容呢？什么是diff算法呢？diff算法其实是1986年Myers提出的，用来解决最长公共序列问题(longest common sequence problem，LCS问题)。Dreact核心的两个内容就是virtual dom和diff算法。React diff作为Virtual DOM的加速器，其算法的改进优化是React界面渲染的基础，以及性能提高的保障。虽然开发">
+<meta name="twitter:image" content="http://yoursite.com/img/tree_diff1.png">
 
 
 
@@ -359,8 +366,19 @@
       
 
       
-        <h3 id="为什么要了解diff这块内容呢？"><a href="#为什么要了解diff这块内容呢？" class="headerlink" title="为什么要了解diff这块内容呢？"></a>为什么要了解diff这块内容呢？</h3><p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.4.6927&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener">什么是diff算法呢？</a>diff算法其实是1986年Myers提出的，用来解决最长公共序列问题(longest common sequence problem，LCS问题)。Dreact核心的两个内容就是virtual dom和diff算法。React diff作为Virtual DOM的加速器，其算法的改进优化是React界面渲染的基础，以及性能提高的保障。虽然开发中不需要知道其运行机制，但是理解之后有助于更好的理解React组件的生命周期，以及优化React程序。</p>
-<h3 id="react-diff和diff有什么不同呢？"><a href="#react-diff和diff有什么不同呢？" class="headerlink" title="react diff和diff有什么不同呢？"></a>react diff和diff有什么不同呢？</h3><p>react diff是在diff算法上做了进一步人的优化，传统的diff算法的时间复杂度是O(n^3),而react diff算法的时间复杂度是O(n)，那么react diff究竟是怎么做到的呢？<br>其实，react diff是在传统的diff算法上做了三个假设条件。</p>
+        <h2 id="为什么要了解diff这块内容呢？"><a href="#为什么要了解diff这块内容呢？" class="headerlink" title="为什么要了解diff这块内容呢？"></a>为什么要了解diff这块内容呢？</h2><p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.4.6927&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener">什么是diff算法呢？</a>diff算法其实是1986年Myers提出的，用来解决最长公共序列问题(longest common sequence problem，LCS问题)。Dreact核心的两个内容就是virtual dom和diff算法。React diff作为Virtual DOM的加速器，其算法的改进优化是React界面渲染的基础，以及性能提高的保障。虽然开发中不需要知道其运行机制，但是理解之后有助于更好的理解React组件的生命周期，以及优化React程序。</p>
+<h2 id="react-diff和diff有什么不同呢？"><a href="#react-diff和diff有什么不同呢？" class="headerlink" title="react diff和diff有什么不同呢？"></a>react diff和diff有什么不同呢？</h2><p>react diff是在diff算法上做了进一步人的优化，<a href="https://grfia.dlsi.ua.es/ml/algorithms/references/editsurvey_bille.pdf" target="_blank" rel="noopener">传统的diff算法的时间复杂度是O(n^3)</a>,而react diff算法的时间复杂度是O(n)，那么react diff究竟是怎么做到的呢？<br>其实，react diff是在传统的diff算法上做了三个假设条件:</p>
+<blockquote>
+<p>1⃣️DOM 节点跨层级的移动操作特别少，可以忽略不计。<br>2⃣️拥有相同类的两个组件将会生成相似的树形结构，拥有不同类的两个组件将会生成不同的树形结构。<br>3⃣️对于同一层级的一组子节点，它们可以通过唯一 id(key) 进行区分。<br>基于以上三个前提策略，React 分别对 <strong>tree diff、component diff 以及 element diff</strong> 进行算法优化。</p>
+</blockquote>
+<h3 id="tree-diff"><a href="#tree-diff" class="headerlink" title="tree diff"></a>tree diff</h3><p>基于假设一，React 对树的算法进行了简洁明了的优化，即对树进行分层比较，两棵树只会对同一层次的节点进行比较。React对树做了层级控制，只会对某个节点的所有子节点进行比较，如下图，只会对同一颜色方框内的节点进行比较，而不会跨层级进行比较，传统的diff算法是跨层级对每个节点进行两两比较。如果一个父节点不存在了，那么该节点的子节点就不会再进一步比较了。只需要对树遍历一次就可以实现与DOM树的比较。<br><!-- ![](/img/tree_diff1.png) --><br><img src="/img/tree_diff1.png" width="500" hegiht="313" align="center"></p>
+<p>那如果有跨层级操作的dom节点怎么办呢？如下图A节点跨层级放到D节点的左子节点。React diff用趋近于‘暴力’的方式，并不是把A B C 直接拼接到 D 节点上，而是删除A B C 三个节点之后在 D 下面在创建的 A B C。此时，React diff 的执行情况：create A -&gt; create B -&gt; create C -&gt; delete A。<br><!-- ![](/img/tree_diff2.png) --><br><img src="/img/tree_diff2.png" width="500" hegiht="313" align="center"></p>
+<h3 id="component-diff"><a href="#component-diff" class="headerlink" title="component diff"></a>component diff</h3><ul>
+<li>对于同一类型的组件，根据Virtual DOM是否变化也分两种，可以用shouldComponentUpdate()判断Virtual DOM是否发生了变化，若没有变化就不需要在进行diff，这样可以节省大量时间，若变化了，就对相关节点进行update</li>
+<li>对于非同一类的组件，则将该组件判断为 dirty component，从而替换整个组件下的所有子节点。</li>
+</ul>
+<p>如下图，当 component D 改变为 component G 时，即使这两个 component 结构相似，一旦 React 判断 D 和 G 是不同类型的组件，就不会比较二者的结构，而是直接删除 component D，重新创建 component G 以及其子节点。虽然当两个 component 是不同类型但结构相似时，React diff 会影响性能，但正如 React 官方博客所言：不同类型的 component 是很少存在相似 DOM tree 的机会，因此这种极端因素很难在实现开发过程中造成重大影响的。<br><img src="/img/component_diff.png" width="500" hegiht="313" align="center"></p>
+<h3 id="element-diff"><a href="#element-diff" class="headerlink" title="element diff"></a>element diff</h3><p>这种情况是我们在开发中最常遇到的，所以详细分析一下这种情况。当节点处于同一层级时，React diff 提供了三种节点操作，分别为：INSERT_MARKUP（插入）、MOVE_EXISTING（移动）和 REMOVE_NODE（删除）。<br>我们先来看没经过优化的diff算法在面对这种情况的时候是怎么操作的。<br><img src="/img/element_diff1.png" alt=""><br>如上图，老集合中的节点是A、B、C、D，老集合中的节点是B、A、D、C，当传统的diff算法对新旧集合进行差异化对比时，当拿出新集合中的第一个节点B时，与旧集合中的第一个节点进行比较，发现B != A,此时，旧集合会先删除A节点，并创建B节点，后续会删除B、C、D节点创建A、D、C，这样下来我们发现会频繁的创建和删除dom节点，极大地降低页面的性能。这个时候我们想能不能通过移动现有的节点生成新的集合，而不是频繁的创建和删除节点呢？<br><img src="/img/element_diff2.png" width="500" hegiht="313" align="center"><br>那么react diff 算法是怎么做的呢？优化后的react算法通过给每一个组件加一个key值，也就是给每一个组件加一个唯一性的标识。如下图，当react diff算法对新旧集合进行差异化对比时，发现新集合中的节点B在老集合中能找到，便对老集合中的B不做任何操作。<br><!-- ![](/img/element_diff3.png =200x300) --><br><img src="/img/element_diff3.png" width="500" hegiht="313" align="center"></p>
 
       
     </div>
@@ -531,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要了解diff这块内容呢？"><span class="nav-number">1.</span> <span class="nav-text">为什么要了解diff这块内容呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-diff和diff有什么不同呢？"><span class="nav-number">2.</span> <span class="nav-text">react diff和diff有什么不同呢？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要了解diff这块内容呢？"><span class="nav-number">1.</span> <span class="nav-text">为什么要了解diff这块内容呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-diff和diff有什么不同呢？"><span class="nav-number">2.</span> <span class="nav-text">react diff和diff有什么不同呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tree-diff"><span class="nav-number">2.1.</span> <span class="nav-text">tree diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#component-diff"><span class="nav-number">2.2.</span> <span class="nav-text">component diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#element-diff"><span class="nav-number">2.3.</span> <span class="nav-text">element diff</span></a></li></ol></li></ol></div>
             
 
           </div>
